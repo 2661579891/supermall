@@ -1,9 +1,8 @@
 <template>
   <div class="tab-control">
-    <div class="tab-control-item"
-         :class="{active: currentIndex === index}"
-         @click="itemClick(index)"
-         v-for="(item, index) in titles">
+    <div v-for="(item, index) in titles"
+         class="tab-control-item"
+         :class="{active: index == currentIndex}" @click="itemClick(index)">
       <span>{{item}}</span>
     </div>
   </div>
@@ -20,18 +19,15 @@
         }
       }
     },
-    data: function () {
-      return {
-        currentIndex: 0
+    data(){
+		  return {
+		    currentIndex: 0
       }
     },
     methods: {
-      itemClick: function (index) {
-        // 1.改变currentIndex
+      itemClick(index) {
         this.currentIndex = index;
-
-        // 2.发出事件
-        this.$emit('itemClick', index)
+        this.$emit('tabClick', index);
       }
     }
 	}
@@ -60,6 +56,6 @@
   }
 
   .active span {
-    border-bottom: 2px solid var(--color-high-text);
+    border-bottom: 3px solid var(--color-tint);
   }
 </style>
